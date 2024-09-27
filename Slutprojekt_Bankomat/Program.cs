@@ -46,7 +46,7 @@
                         {
                             case 1:
                                 Console.WriteLine("Dina konton och saldon");
-                                userNumber = AccountBalance();
+                                Console.WriteLine($"Konto med nummer {userNumber} har saldo: { AccountBalance(userNumber) }" );
                                 Console.ReadKey();
                                 //Metod för konton och saldo
                                 break;
@@ -89,19 +89,27 @@
             }
 
         }
-        public static void AccountBalance()
+        public static int AccountBalance(int userName)
         {
             int[] userNameArray = new int[] { 850128, 890918, 100723, 180423, 230110 };
             int[] userBalanceArray = new int[] { 22034, 101455, 11003, 8078, 3452 };
 
-            if (userNameArray[0])
-            {
-                Console.WriteLine(userBalanceArray[0]);
-            }
-            
+            Console.WriteLine(userBalanceArray[Array.IndexOf(userNameArray, userName)]);
 
-            
+                return userBalanceArray[0];
 
+
+
+            //Console.WriteLine("Välkommen till DinBank!");
+            //Console.WriteLine("Skriv ditt personnummer: ");
+            //int userNumber = Int32.Parse(Console.ReadLine());
+            //Console.WriteLine("Skriv ditt lösenord: ");
+
+            //while (!correctLoggin && userLoggins < 3)
+            //{
+
+            //    userPass = Int32.Parse(Console.ReadLine());
+            //    if (userPass == userPassArray[Array.IndexOf(userNameArray, userNumber)])
 
 
 
