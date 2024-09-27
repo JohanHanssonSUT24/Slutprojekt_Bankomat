@@ -64,6 +64,7 @@
 
                             case 3:
                                 Console.WriteLine("Ta ut pengar");
+                                WithdrawMoney(userNumber, userNameArray, userBalanceArray, userSavingsArray);
                                 Console.ReadKey();
                                 //Metod för uttag
                                 break;
@@ -107,50 +108,78 @@
         }
         public static void TransferMoney(int userName, int[] userNameArray, int[] userBalanceArray, int[] userSavingsArray)
         {
-
-            int userBalance = userBalanceArray[Array.IndexOf(userNameArray, userName)];
-            int userSavings = userSavingsArray[Array.IndexOf(userNameArray, userName)];
+            int userIndex = Array.IndexOf(userNameArray, userName);
+            int userBalance = userBalanceArray[userIndex];
+            int userSavings = userSavingsArray[userIndex];
             Console.WriteLine("Vilket konto vill du föra över pengar ifrån?");
             Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
             Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
             int account = Int32.Parse(Console.ReadLine());
-            int amount = 0;
-            int NewUserBalance = userBalance + amount;
-            int NewUserSavings = userSavings - amount;            
-
+            int amount;
+            
 
             if (account == 1)
             {
-                Console.WriteLine("Hur mycket pengar vill du för över?: ");
+                Console.WriteLine("Hur mycket pengar vill du föra över?: ");
                 amount = Int32.Parse(Console.ReadLine());
-                userBalance = userBalance - amount;
-                userSavings = userSavings + amount;
-                Console.WriteLine("Nytt saldo Bankkonto: " + userBalance);
-                Console.WriteLine("Nytt saldo Sparkonto: " + userSavings);
-                
+                userBalanceArray[userIndex] = userBalance - amount;
+                userSavingsArray[userIndex] = userSavings + amount;
+                Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
+                Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
+
             }
 
             else if ( account == 2)
             {
-                Console.WriteLine("Hur mycket pengar vill du för över?: ");
+                Console.WriteLine("Hur mycket pengar vill du föra över?: ");
                 amount = Int32.Parse(Console.ReadLine());
-                //int NewUserBalance = userBalance + amount;
-                //int NewUserSavings = userSavings - amount;
-                Console.WriteLine("Nytt saldo Bankkonto: " + NewUserBalance);
-                Console.WriteLine("Nytt saldo Sparkonto: " + NewUserSavings);
+                userBalanceArray[userIndex] = userBalance + amount;
+                userSavingsArray[userIndex] = userSavings - amount;
+                Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
+                Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
+
+
+            }
+            //return userBalanceArray[userIndex];
+            //return userSavingsArray[userIndex];
+
+        }
+        public static int WithdrawMoney(int userName, int[] userNameArray, int[] userBalanceArray, int[] userSavingsArray)
+        {
+            int userIndex = Array.IndexOf(userNameArray, userName);
+            int userBalance = userBalanceArray[userIndex];
+            int userSavings = userSavingsArray[userIndex];
+            Console.WriteLine("Vilket konto vill du ta ut pengar ifrån?");
+            Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
+            Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
+            int account = Int32.Parse(Console.ReadLine());
+            int amount;
+
+
+            if (account == 1)
+            {
+                Console.WriteLine("Hur mycket pengar vill du ta ut?: ");
+                amount = Int32.Parse(Console.ReadLine());
+                userBalanceArray[userIndex] = userBalance - amount;
+                Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
 
             }
 
-            return NewUserBalance;
-            return NewUserSavings;
-            
+            else if (account == 2)
+            {
+                Console.WriteLine("Hur mycket pengar vill du ta ut?: ");
+                amount = Int32.Parse(Console.ReadLine());
+                userSavingsArray[userIndex] = userSavings - amount;
+                Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
+
+
+            }
+            return userBalanceArray[userIndex];
+            //return userSavingsArray[userIndex];
 
         }
-        
-        //}
-        //public static int WithdrawMoney()
-        //{
-        //    return;
-        //}
+
     }
+   
 }
+
