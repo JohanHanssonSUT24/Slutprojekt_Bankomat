@@ -2,23 +2,26 @@
 {
     internal class Program
     {
+
         static void Main(string[] args)
         {
 
             int[] userNameArray = new int[] { 850128, 890918, 100723, 180423, 230110 };
             int[] userPassArray = new int[] { 1111, 2222, 3333, 4444, 5555 };
+            int[] userBalanceArray = new int[] { 22034, 101455, 11003, 8078, 3452 };
+            int[] userSavingsArray = new int[] { 12503, 202434, 30078, 4054, 599 };
 
             bool correctLoggin = false;
             int userPass;
             int userLoggins = 0;
 
-            Console.WriteLine("Välkommen till DinBank!");
-            Console.WriteLine("Skriv ditt personnummer: ");
-            int userNumber = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Skriv ditt lösenord: ");
 
             while (!correctLoggin && userLoggins < 3)
             {
+                Console.WriteLine("Välkommen till DinBank!");
+                Console.WriteLine("Skriv ditt personnummer: ");
+                int userNumber = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Skriv ditt lösenord: ");
 
                 userPass = Int32.Parse(Console.ReadLine());
                 if (userPass == userPassArray[Array.IndexOf(userNameArray, userNumber)])
@@ -32,9 +35,9 @@
                         Console.WriteLine("[1] Se dina konton och saldo");
                         Console.WriteLine("[2] Överföring mellan konton");
                         Console.WriteLine("[3] Ta ut pengar");
-                        Console.WriteLine("[4] Avsluta programmet");
+                        Console.WriteLine("[4] Logga ut");
 
-
+                        
 
                         int menuChoice;
                         while (!Int32.TryParse(Console.ReadLine(), out menuChoice))
@@ -45,8 +48,9 @@
                         switch (menuChoice)
                         {
                             case 1:
-                                Console.WriteLine("Dina konton och saldon");
-                                Console.WriteLine($"Konto med nummer {userNumber} har saldo: { AccountBalance(userNumber) }" );
+                                Console.WriteLine("Aktuella saldon:");
+                                AccountBalance(userNumber, userNameArray, userBalanceArray, userSavingsArray);
+                                
                                 Console.ReadKey();
                                 //Metod för konton och saldo
                                 break;
@@ -64,11 +68,11 @@
                                 break;
 
                             case 4:
-                                Console.Write("Tack för besöket. Vi ses nästa gång!");
+                                Console.Write("Du loggas nu ut. Tack för besöket!");
                                 menuBool = false;
+                                Console.ReadKey();
+                                Console.Clear();
                                 break;
-
-
 
                         }
 
@@ -89,32 +93,26 @@
             }
 
         }
-        public static int AccountBalance(int userName)
+        public static int AccountBalance(int userName, int[]userNameArray, int[] userBalanceArray, int[] userSavingsArray)
         {
-            int[] userNameArray = new int[] { 850128, 890918, 100723, 180423, 230110 };
-            int[] userBalanceArray = new int[] { 22034, 101455, 11003, 8078, 3452 };
 
-            Console.WriteLine(userBalanceArray[Array.IndexOf(userNameArray, userName)]);
+            Console.WriteLine("Bankkonto: " + userBalanceArray[Array.IndexOf(userNameArray, userName)]);
+            Console.WriteLine("Sparkonto: " + userSavingsArray[Array.IndexOf(userNameArray, userName)]);
 
-                return userBalanceArray[0];
-
-
-
-            //Console.WriteLine("Välkommen till DinBank!");
-            //Console.WriteLine("Skriv ditt personnummer: ");
-            //int userNumber = Int32.Parse(Console.ReadLine());
-            //Console.WriteLine("Skriv ditt lösenord: ");
-
-            //while (!correctLoggin && userLoggins < 3)
-            //{
-
-            //    userPass = Int32.Parse(Console.ReadLine());
-            //    if (userPass == userPassArray[Array.IndexOf(userNameArray, userNumber)])
-
-
-
-
+            return userNameArray[0];
 
         }
+        //public static int TransferMoney(int fromAccount)
+        //{
+        //    int moneyFrom;
+        //    int moneyTo;
+
+
+        //    return;
+        //}
+        //public static int WithdrawMoney()
+        //{
+        //    return;
+        //}
     }
 }
