@@ -5,7 +5,7 @@
 
         static void Main(string[] args)
         {
-
+            //Create arrays for users accountname, password, bankaccount and savingsaccount.
             int[] userNameArray = new int[] { 850128, 890918, 100723, 180423, 230110 };
             int[] userPassArray = new int[] { 1111, 2222, 3333, 4444, 5555 };
             int[] userBalanceArray = new int[] { 22034, 101455, 11003, 8078, 3452 };
@@ -37,8 +37,6 @@
                         Console.WriteLine("[3] Ta ut pengar");
                         Console.WriteLine("[4] Logga ut");
 
-                        
-
                         int menuChoice;
                         while (!Int32.TryParse(Console.ReadLine(), out menuChoice))
                         {
@@ -48,28 +46,35 @@
                         switch (menuChoice)
                         {
                             case 1:
-                                Console.WriteLine("Aktuella saldon:");
+                                Console.Clear();
+                                Console.WriteLine("Se konton och saldo:");
                                 AccountBalance(userNumber, userNameArray, userBalanceArray, userSavingsArray);
-                                
+                                Console.WriteLine("Klicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
+
                                 //Metod för konton och saldo
                                 break;
 
                             case 2:
-                                Console.WriteLine("Intern överföring");
+                                Console.Clear();
+                                Console.WriteLine("Överföring mellan konton");
                                 TransferMoney(userNumber, userNameArray, userBalanceArray, userSavingsArray);
+                                Console.WriteLine("Klicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
                                 //Metod för överföring
                                 break;
 
                             case 3:
+                                Console.Clear();
                                 Console.WriteLine("Ta ut pengar");
                                 WithdrawMoney(userNumber, userNameArray, userBalanceArray, userSavingsArray);
+                                Console.WriteLine("Klicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
                                 //Metod för uttag
                                 break;
 
                             case 4:
+                                Console.Clear();
                                 Console.Write("Du loggas nu ut. Tack för besöket!");
                                 menuBool = false;
                                 Console.ReadKey();
@@ -100,8 +105,6 @@
 
             Console.WriteLine("Bankkonto: " + userBalanceArray[Array.IndexOf(userNameArray, userName)]);
             Console.WriteLine("Sparkonto: " + userSavingsArray[Array.IndexOf(userNameArray, userName)]);
-
-            
 
             return userNameArray[0];
 
@@ -140,11 +143,9 @@
 
 
             }
-            //return userBalanceArray[userIndex];
-            //return userSavingsArray[userIndex];
-
+         
         }
-        public static int WithdrawMoney(int userName, int[] userNameArray, int[] userBalanceArray, int[] userSavingsArray)
+        public static void WithdrawMoney(int userName, int[] userNameArray, int[] userBalanceArray, int[] userSavingsArray)
         {
             int userIndex = Array.IndexOf(userNameArray, userName);
             int userBalance = userBalanceArray[userIndex];
@@ -174,8 +175,7 @@
 
 
             }
-            return userBalanceArray[userIndex];
-            //return userSavingsArray[userIndex];
+            
 
         }
 
