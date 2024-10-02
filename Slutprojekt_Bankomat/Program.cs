@@ -50,7 +50,7 @@
                                 Console.Clear();
                                 Console.WriteLine("Se konton och saldo:");
                                 AccountBalance(userNumber, userNameArray, userBalanceArray, userSavingsArray, userPensionArray, userLifeInsurance);
-                                Console.WriteLine("Klicka på valfri tangent för att återvända till menyn.");
+                                Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
 
                                 //Metod för konton och saldo
@@ -60,7 +60,7 @@
                                 Console.Clear();
                                 Console.WriteLine("Överföring");
                                 TransferMoney(userNumber, userNameArray, userBalanceArray, userSavingsArray, userPensionArray, userLifeInsurance);
-                                Console.WriteLine("Klicka på valfri tangent för att återvända till menyn.");
+                                Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
                                 //Metod för överföring
                                 break;
@@ -69,7 +69,7 @@
                                 Console.Clear();
                                 Console.WriteLine("Ta ut pengar");
                                 WithdrawMoney(userNumber, userNameArray, userBalanceArray, userSavingsArray);
-                                Console.WriteLine("Klicka på valfri tangent för att återvända till menyn.");
+                                Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
                                 //Metod för uttag
                                 break;
@@ -81,11 +81,8 @@
                                 Console.ReadKey();
                                 Console.Clear();
                                 break;
-
                         }
-
                     }
-
                 }
                 else
                 {
@@ -99,18 +96,17 @@
                     correctLoggin = true;
                 }
             }
-
         }
-        public static int AccountBalance(int userName, int[]userNameArray, int[] userBalanceArray, int[] userSavingsArray, int[] userPensionArray, int[] userLifeInsurance)
+        public static int AccountBalance(int userName, int[] userNameArray, int[] userBalanceArray, int[] userSavingsArray, int[] userPensionArray, int[] userLifeInsurance)
         {
-            if(userName == 850128)
+            if (userName == 850128)
             {
                 Console.WriteLine("Bankkonto: " + userBalanceArray[Array.IndexOf(userNameArray, userName)]);
                 Console.WriteLine("Sparkonto: " + userSavingsArray[Array.IndexOf(userNameArray, userName)]);
                 Console.WriteLine("Pensionkonto: " + userPensionArray[Array.IndexOf(userNameArray, userName)]);
-                Console.WriteLine("Livförsäkringkonto: " + userLifeInsurance[Array.IndexOf(userNameArray, userName)]);
+                Console.WriteLine("Aktier: " + userLifeInsurance[Array.IndexOf(userNameArray, userName)]);
             }
-            else if( userName == 890918)
+            else if (userName == 890918)
             {
                 Console.WriteLine("Bankkonto: " + userBalanceArray[Array.IndexOf(userNameArray, userName)]);
                 Console.WriteLine("Sparkonto: " + userSavingsArray[Array.IndexOf(userNameArray, userName)]);
@@ -120,8 +116,6 @@
             {
                 Console.WriteLine("Sparkonto: " + userSavingsArray[Array.IndexOf(userNameArray, userName)]);
             }
-            
-
             return userNameArray[0];
 
         }
@@ -131,46 +125,98 @@
             int userBalance = userBalanceArray[userIndex];
             int userSavings = userSavingsArray[userIndex];
             int userPension = userPensionArray[userIndex];
-            int userLifeIn = userLifeInsurance[userIndex];
-            
-            if(userName == 850128)
+            int userStock = userLifeInsurance[userIndex];
+
+            if (userName == 850128)
             {
-                Console.WriteLine("Vilket konto vill du föra över pengar ifrån?");
+                Console.WriteLine("Vilket konto vill du för över ifrån?: ");                
                 Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
                 Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
                 Console.WriteLine("[3] Pensionskonto - Saldo: " + userPension);
-                Console.WriteLine("[4] Livförsäkring - Saldo: " + userLifeIn);
-                int account = Int32.Parse(Console.ReadLine());
-                int amount;
-
-
-                if (account == 1)
+                Console.WriteLine("[4] Aktier - Saldo: " + userStock);
+                int fromAccount = Int32.Parse(Console.ReadLine());
+                if(fromAccount == 1)
                 {
-                    Console.WriteLine("Hur mycket pengar vill du föra över?: ");
-                    amount = Int32.Parse(Console.ReadLine());
-                    userBalanceArray[userIndex] = userBalance - amount;
-                    userSavingsArray[userIndex] = userSavings + amount;
-                    Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
-                    Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
-
-
+                    Console.WriteLine("Vilket konto vill du föra över till?: ");
+                    Console.WriteLine("[1] Sparkonto - Saldo: " + userSavings);
+                    Console.WriteLine("[2] Pensionskonto - Saldo: " + userPension);
+                    Console.WriteLine("[3] Aktier - Saldo: " + userStock);
 
                 }
-
-                else if (account == 2)
+                else if(fromAccount == 2)
                 {
-                    Console.WriteLine("Hur mycket pengar vill du föra över?: ");
-                    amount = Int32.Parse(Console.ReadLine());
-                    userBalanceArray[userIndex] = userBalance + amount;
-                    userSavingsArray[userIndex] = userSavings - amount;
-                    Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
-                    Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
-
-
+                    Console.WriteLine("Vilket konto vill du föra över till?: ");
+                    Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
+                    Console.WriteLine("[2] Pensionskonto - Saldo: " + userPension);
+                    Console.WriteLine("[3] Aktier - Saldo: " + userStock);
                 }
+                else if(fromAccount == 3)
+                {
+                    Console.WriteLine("Vilket konto vill du föra över till?: ");
+                    Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
+                    Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
+                    Console.WriteLine("[3] Aktier - Saldo: " + userStock);
+                }
+                else if(fromAccount == 4)
+                {
+                    Console.WriteLine("Vilket konto vill du föra över till?: ");
+                    Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
+                    Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
+                    Console.WriteLine("[3] Pensionskonto - Saldo: " + userPension);
+                }
+
+                //Console.WriteLine("Vilket konto vill du föra över till?: ");
+                //Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
+                //Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
+                //Console.WriteLine("[3] Pensionskonto - Saldo: " + userPension);
+                //Console.WriteLine("[4] Livförsäkring - Saldo: " + userLifeIn);
+                //int ToAccount = Int32.Parse(Console.ReadLine());
+
+
+
+                //int amount;
+                //Console.WriteLine("Vilket konto vill du föra över pengar ifrån?");
+                //Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
+                //Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
+                //Console.WriteLine("[3] Pensionskonto - Saldo: " + userPension);
+                //Console.WriteLine("[4] Livförsäkring - Saldo: " + userLifeIn);
+                //int accountFrom = Int32.Parse(Console.ReadLine());
+                //Console.WriteLine("Vilket konto vill du föra över pengar till?");
+                //Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
+                //Console.WriteLine("[2] Sparkonto - Saldo: " + userSavings);
+                //Console.WriteLine("[3] Pensionskonto - Saldo: " + userPension);
+                //Console.WriteLine("[4] Livförsäkring - Saldo: " + userLifeIn);
+                //int accountTo = Int32.Parse(Console.ReadLine());
+
+
+                //if (accountFrom)
+                //{
+                //    Console.WriteLine("Hur mycket pengar vill du föra över?: ");
+                //    amount = Int32.Parse(Console.ReadLine());
+                //    userBalanceArray[userIndex] = userBalance - amount;
+                //    userSavingsArray[userIndex] = userSavings + amount;
+                //    Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
+                //    Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
+
+                //}
+                //else if (account == 2)
+                //{
+                //    Console.WriteLine("Hur mycket pengar vill du föra över?: ");
+                //    amount = Int32.Parse(Console.ReadLine());
+                //    userBalanceArray[userIndex] = userBalance + amount;
+                //    userSavingsArray[userIndex] = userSavings - amount;
+                //    Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
+                //    Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
+                //}
+                //else if(account == 3)
+                //{
+
+                //}
+                //else
+                //{
+
+                //}
             }
-            
-         
         }
         public static void WithdrawMoney(int userName, int[] userNameArray, int[] userBalanceArray, int[] userSavingsArray)
         {
@@ -183,30 +229,21 @@
             int account = Int32.Parse(Console.ReadLine());
             int amount;
 
-
             if (account == 1)
             {
                 Console.WriteLine("Hur mycket pengar vill du ta ut?: ");
                 amount = Int32.Parse(Console.ReadLine());
                 userBalanceArray[userIndex] = userBalance - amount;
                 Console.WriteLine("Nytt saldo Bankkonto: " + userBalanceArray[userIndex]);
-
             }
-
             else if (account == 2)
             {
                 Console.WriteLine("Hur mycket pengar vill du ta ut?: ");
                 amount = Int32.Parse(Console.ReadLine());
                 userSavingsArray[userIndex] = userSavings - amount;
                 Console.WriteLine("Nytt saldo Sparkonto: " + userSavingsArray[userIndex]);
-
-
             }
-            
-
         }
-
     }
-   
 }
 
