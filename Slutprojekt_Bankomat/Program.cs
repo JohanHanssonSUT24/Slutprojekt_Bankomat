@@ -1,4 +1,6 @@
-﻿namespace Slutprojekt_Bankomat
+﻿using System.Security.Principal;
+
+namespace Slutprojekt_Bankomat
 {
     internal class Program
     {
@@ -74,11 +76,11 @@
                                 break;
 
                             case 2:
-                                //Console.Clear();
-                                //Console.WriteLine("Överföring");
-                                //TransferMoney(userNumber, userNameArray, userBalanceArray, userSavingsArray, userPensionArray, userStocksArray);
-                                //Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
-                                //Console.ReadKey();
+                                Console.Clear();
+                                Console.WriteLine("Överföring");
+                                TransferMoney(userNumber, userNameArray, bankAccounts, accountBalance);
+                                Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
+                                Console.ReadKey();
                                 //Metod för överföring
                                 break;
 
@@ -112,11 +114,13 @@
                     Console.WriteLine("Tyvärr, du har försökt logga in för många gånger!");
                     correctLoggin = true;
                 }
+                
             }
         }
         public static void AccountBalance(int userName, int[] userNameArray, string[][] bankAccounts, double[][] accountBalance)
         {
             int userIndex = Array.IndexOf(userNameArray, userName);
+
             for (int i = 0; i < bankAccounts[userIndex].Length; i++)
             {
                 string bankAccount = bankAccounts[userIndex][i];
@@ -129,10 +133,46 @@
 
         }
     }
+    public static void TransferMoney(int userName, int[] userNameArray, string[][] bankAccounts, double[][] accountBalance)
+    {
+        int userIndex = Array.IndexOf(userNameArray, userName);
+        int fromAccount;
+        int toAccount;
+        int amount;
+
+        for (int i = 0; i < bankAccounts[userIndex].Length; i++)
+        {
+            string bankAccount = bankAccounts[userIndex][i];
+            double balanceOfAccount = accountBalance[userIndex][i];
+
+            Console.WriteLine("Konto: " + bankAccount);
+            Console.WriteLine("Saldo: " + balanceOfAccount);
+            Console.WriteLine("---------------------");
+        }
+
+        Console.WriteLine("\nVälj ett konto att föra över pengar ifrån: ");
+        fromAccount = Convert.ToInt32(Console.ReadLine());
+
+
+        Console.WriteLine("Välj ett konto att föra över pengar till: ");
+        toAccount = Convert.ToInt32(Console.ReadLine());
+
+        if (userIndex == fromAccount + 1)
+        {
+
+        }
+        
+    }
 }
+
+            //accounts[userIndex, fromAccount - 1, 1] = (int)accounts[userIndex, fromAccount - 1, 1] - amount;
+            //accounts[userIndex, toAccount - 1, 1] = (int)accounts[userIndex, toAccount - 1, 1] + amount;
+
+
+
 //        public static void TransferMoney(int userName, int[] userNameArray, int[] userBalanceArray, int[] userSavingsArray, int[] userPensionArray, int[] userLifeInsurance)
 //        {
-            
+
 //            int userBalance = userBalanceArray[userIndex];
 //            int userSavings = userSavingsArray[userIndex];
 //            int userPension = userPensionArray[userIndex];
@@ -176,7 +216,7 @@
 //                    Console.WriteLine("[3] Pensionskonto - Saldo: " + userPension);
 //                }
 
-                
+
 
 //                //Console.WriteLine("Vilket konto vill du föra över till?: ");
 //                //Console.WriteLine("[1] Bankkonto - Saldo: " + userBalance);
