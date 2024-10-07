@@ -61,45 +61,53 @@ namespace Slutprojekt_Bankomat
                         while (!Int32.TryParse(Console.ReadLine(), out menuChoice))
                         {
                             Console.WriteLine("Felaktig input!\nAnge alt 1 - 4. ");
+                            Console.ReadKey();
                         }
 
                         switch (menuChoice)
                         {
-                            case 1:
+                            case 1: //Konton och saldon
                                 Console.Clear();
                                 Console.WriteLine("Se konton och saldo:\n");
+                                Console.WriteLine("--------------------");
                                 AccountBalance(userNumber, userNameArray, bankAccounts, accountBalance);
                                 Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
 
-                                //Metod för konton och saldo
+                                
                                 break;
 
-                            case 2:
+                            case 2: //Överföring
                                 Console.Clear();
                                 Console.WriteLine("Överföring");
-                                Console.WriteLine("----------");
+                                Console.WriteLine("-----------\n");
                                 TransferFunds(userNumber, userNameArray, bankAccounts, accountBalance);
                                 Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
                                 Console.ReadKey();
                                 //Metod för överföring
                                 break;
 
-                            case 3:
-                                //Console.Clear();
-                                //Console.WriteLine("Ta ut pengar");
-                                //WithdrawMoney(userNumber, userNameArray, userBalanceArray, userSavingsArray);
-                                //Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
-                                //Console.ReadKey();
+                            case 3: //uttag
+                                Console.Clear();
+                                Console.WriteLine("Uttag");
+                                Console.WriteLine("-------\n");
+                                WithdrawMoney(userNumber, userNameArray, bankAccounts, accountBalance);
+                                Console.WriteLine("\n\nKlicka på valfri tangent för att återvända till menyn.");
+                                Console.ReadKey();
                                 //Metod för uttag
                                 break;
 
-                            case 4:
+                            case 4: //Utloggning
                                 Console.Clear();
                                 Console.Write("Du loggas nu ut. Tack för besöket!");
                                 menuBool = false;
                                 Console.ReadKey();
                                 Console.Clear();
+                                break;
+
+                            default:
+                                Console.WriteLine("Felaktig input. Välj alt 1-4!");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -127,11 +135,10 @@ namespace Slutprojekt_Bankomat
                 string bankAccount = bankAccounts[userIndex][i];
                 double balanceOfAccount = accountBalance[userIndex][i];
 
-                Console.WriteLine("Konto: " + bankAccount);
+                Console.WriteLine($"Konto: " + bankAccount);
                 Console.WriteLine("Saldo: " + balanceOfAccount);
                 Console.WriteLine("---------------------");
             }
-
         }
 
         public static void TransferFunds(int userName, int[] userNameArray, string[][] bankAccounts, double[][] accountBalance)
@@ -143,29 +150,62 @@ namespace Slutprojekt_Bankomat
                 string bankAccount = bankAccounts[userIndex][i];
                 double balanceOfAccount = accountBalance[userIndex][i];
 
-                Console.WriteLine("Konto: " + bankAccount);
-                Console.WriteLine("Saldo: " + balanceOfAccount);
+                Console.WriteLine($"Konto: " + bankAccount);
+                Console.WriteLine($"Saldo: " + balanceOfAccount);
                 Console.WriteLine("---------------------");
             }
 
             Console.WriteLine("Skriv den summa du vill flytta över: ");
             double transferSum = double.Parse(Console.ReadLine());
             Console.WriteLine("Välj konto att flytta pengar ifrån: ");
-            int fromAccount = Int32.Parse(Console.ReadLine());
+            int fromAccount = Int32.Parse(Console.ReadLine())-1;
             accountBalance[userIndex][fromAccount] = accountBalance[userIndex][fromAccount]-transferSum;
             Console.WriteLine("Välj konto att flytta pengar till: ");
-            int toAccount = Int32.Parse(Console.ReadLine());
+            int toAccount = Int32.Parse(Console.ReadLine())-1;
             accountBalance[userIndex][toAccount] = accountBalance[userIndex][toAccount] + transferSum;
 
-            Console.WriteLine("Nytt saldo:\n");
+            Console.WriteLine("\nNytt saldo:\n");
             for (int i = 0; i < accountBalance[userIndex].Length; i++)
             {
                 string bankAccount = bankAccounts[userIndex][i];
                 double balanceOfAccount = accountBalance[userIndex][i];
 
 
-                Console.WriteLine("Konto: " + bankAccount);
-                Console.WriteLine("Saldo: " + balanceOfAccount);
+                Console.WriteLine($"Konto: " + bankAccount);
+                Console.WriteLine($"Saldo: " + balanceOfAccount);
+                Console.WriteLine("---------------------");
+            }
+        }
+        public static void WithdrawMoney(int userName, int[] userNameArray, string[][] bankAccounts, double[][] accountBalance)
+        {
+            int userIndex = Array.IndexOf(userNameArray, userName);
+
+            for (int i = 0; i < bankAccounts[userIndex].Length; i++)
+            {
+                string bankAccount = bankAccounts[userIndex][i];
+                double balanceOfAccount = accountBalance[userIndex][i];
+
+                Console.WriteLine($"Konto: " + bankAccount);
+                Console.WriteLine($"Saldo: " + balanceOfAccount);
+                Console.WriteLine("---------------------");
+            }
+
+            Console.WriteLine("Skriv den summa du vill ta ut: ");
+            double transferSum = double.Parse(Console.ReadLine());
+            Console.WriteLine("Välj konto att ta pengar ifrån: ");
+            int fromAccount = Int32.Parse(Console.ReadLine()) - 1;
+            accountBalance[userIndex][fromAccount] = accountBalance[userIndex][fromAccount] - transferSum;
+            
+
+            Console.WriteLine("\nNytt saldo:\n");
+            for (int i = 0; i < accountBalance[userIndex].Length; i++)
+            {
+                string bankAccount = bankAccounts[userIndex][i];
+                double balanceOfAccount = accountBalance[userIndex][i];
+
+
+                Console.WriteLine($"Konto: " + bankAccount);
+                Console.WriteLine($"Saldo: " + balanceOfAccount);
                 Console.WriteLine("---------------------");
             }
         }
