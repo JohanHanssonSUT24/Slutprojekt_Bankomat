@@ -125,6 +125,11 @@ namespace Slutprojekt_Bankomat
             UserConfirmation(userNumber, userNameArray, bankAccounts, accountBalance);
             int user = Array.IndexOf(userNameArray, userNumber);
 
+            if (bankAccounts[user].Length < 2) //Validate if transfer is possible
+            {
+                Console.WriteLine("Du kan inte föra över mellan konton då du endast har ett konto.");
+                transferBool = false;
+            }
             while (transferBool)
             {
                 Console.WriteLine("Välj konto att flytta pengar ifrån: ");
@@ -205,7 +210,7 @@ namespace Slutprojekt_Bankomat
                 {
                     Console.WriteLine("Skriv den summa du vill ta ut: ");
                     decimal transferSum = decimal.Parse(Console.ReadLine());
-                    if (transferSum <= 0)                                       
+                    if (transferSum <= 0)
                     {
                         Console.WriteLine("Ogiltigt inmatning. Du måste ange en summa högre än 0.\n");
                     }
